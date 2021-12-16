@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+	setlocale(0, "");
+	cout << "Объём памяти в байтах, отводящийся под различные типы данных: \n";
+	cout << "int: " << sizeof(int) << "\n";
+	cout << "short int: " << sizeof(short int) << "\n";
+	cout << "long int: " << sizeof(long int) << "\n";
+	cout << "float: " << sizeof(float) << "\n";
+	cout << "double: " << sizeof(double) << "\n";
+	cout << "long double: " << sizeof(long double) << "\n";
+	cout << "char: " << sizeof(char) << "\n";
+	cout << "bool: " << sizeof(bool) << "\n";
+
+	int value;
+	cout << "Введите целое число: ";
+	cin >> value;
+	unsigned int order = sizeof(value) * 8;
+	unsigned int mask = 1U <<(order - 1);
+	for (int i = 1; i <= order; i++)
+	{
+		putchar(value & mask ? '1' : '0');
+		if (i != 0 && i % 8 == 0)
+			putchar(' ');
+		if (i == 1)
+			putchar(' ');
+		mask >>= 1;
+	}
+
+	union {
+		int value_f;
+		float numb_f;
+	};
+	cout << "\nВведите вещественное число: \n";
+	cin >> numb_f;
+	unsigned int order_f = sizeof(value_f) * 8;
+	unsigned int mask_f = 1U <<(order_f - 1);
+	for (int i = 1; i <= order_f; i++)
+	{
+		putchar(value_f & mask_f ? '1' : '0');
+		if (i == 1 || i == 9)
+			putchar(' ');
+		mask_f>>= 1;
+	}
+
+	union {
+		long long int value_d;
+		double numb_d;
+	};
+	cout << "\nВведите число типа double: \n";
+	cin >> numb_d;
+	unsigned int order_d = sizeof(value_d) * 8;
+	unsigned long long int mask_d = 1ULL <<(order_d - 1);
+	for (int i = 1; i <= order_d; ++i)
+	{
+		putchar(value_d & mask_d ? '1' : '0');
+		if (i == 1 || i == 12)
+			putchar(' ');
+		mask_d >>= 1;
+	}
+	return 0;
+}
